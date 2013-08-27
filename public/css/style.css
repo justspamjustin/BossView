@@ -149,33 +149,39 @@ h1 {
   padding: 1rem;
 }
 
-/* line 3, ../../scss/download.scss */
+/* line 4, ../../scss/download.scss */
 .boss-download {
   width: 80%;
   margin: auto;
 }
 
-/* line 8, ../../scss/download.scss */
+/* line 9, ../../scss/download.scss */
 .boss-download_downloads-row {
   margin: auto;
   width: 50.25em;
 }
 
-/* line 13, ../../scss/download.scss */
+/* line 14, ../../scss/download.scss */
 .boss-header_download-button {
   width: 21rem;
   margin: 1rem 2rem;
 }
 
-/* line 18, ../../scss/download.scss */
+/* line 19, ../../scss/download.scss */
 .boss-download_download-button-icon {
   font-size: 130%;
 }
 
-/* line 22, ../../scss/download.scss */
+/* line 23, ../../scss/download.scss */
 .boss-download_download-button-size {
   font-weight: 300;
   font-size: 80%;
+}
+
+/* line 28, ../../scss/download.scss */
+.boss-download_dependencies {
+  color: #f1f1f1;
+  text-align: center;
 }
 
 /* line 3, ../../scss/examples.scss */
@@ -223,31 +229,64 @@ h1 {
 .boss-examples_example-header-title {
   font-size: 250%;
   color: #f1f1f1;
+  margin-top: 1rem;
 }
 
-/* line 38, ../../scss/examples.scss */
+/* line 39, ../../scss/examples.scss */
 .boss-examples_example-title {
   color: #f1f1f1;
   font-size: 150%;
   margin-bottom: 1rem;
   margin-left: 1rem;
 }
-/* line 43, ../../scss/examples.scss */
+/* line 44, ../../scss/examples.scss */
 .boss-examples_example-title:before {
   content: '> ';
 }
 
-/* line 48, ../../scss/examples.scss */
+/* line 49, ../../scss/examples.scss */
 .boss-examples_render-example {
   height: 23.2em;
 }
 
-/* line 52, ../../scss/examples.scss */
+/* line 53, ../../scss/examples.scss */
 .boss-examples_render-event-example {
   height: 27.9em;
 }
 
-/* line 56, ../../scss/examples.scss */
+/* line 57, ../../scss/examples.scss */
 .boss-examples_render-container-example {
   height: 26.7em;
+}
+
+/* line 61, ../../scss/examples.scss */
+.boss-examples_codepen-example {
+  margin-top: 2rem;
+}
+
+/* line 4, ../../scss/docs.scss */
+.boss-docs {
+  width: 80%;
+  margin: 2em auto;
+  color: #f1f1f1;
+}
+
+/* line 10, ../../scss/docs.scss */
+.boss-docs_item-heading {
+  font-size: 200%;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* line 16, ../../scss/docs.scss */
+.boss-docs_item-summary {
+  width: 60%;
+  font-size: 110%;
+  padding-bottom: 2rem;
+}
+
+/* line 22, ../../scss/docs.scss */
+.boss-docs_item-example {
+  padding-bottom: 2rem;
+  width: 60%;
 }

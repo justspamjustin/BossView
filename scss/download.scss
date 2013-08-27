@@ -1,4 +1,5 @@
 @import "lib/widths";
+@import "lib/colors";
 
 .boss-download {
   width: $body-width-large;
@@ -22,4 +23,9 @@
 .boss-download_download-button-size {
   font-weight: 300;
   font-size: 80%;
+}
+
+.boss-download_dependencies {
+  color: $grey;
+  text-align: center;
 }

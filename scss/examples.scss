@@ -33,6 +33,7 @@
 .boss-examples_example-header-title {
   font-size: 250%;
   color: $grey;
+  margin-top: 1rem;
 }
 
 .boss-examples_example-title {
@@ -55,4 +56,8 @@
 
 .boss-examples_render-container-example {
   height: 26.7em;
+}
+
+.boss-examples_codepen-example {
+  margin-top: 2rem;
 }

@@ -28,7 +28,6 @@
 <section class="boss-hero" id="home">
     <div class="boss-hero_inner-container">
         <h1 class="boss-hero_punchline">Like a <strong>Boss!</strong></h1>
-        <img class="boss-hero_marionette-handles" src="public/img/marionette-handles.png"/>
         <h2 class="boss-hero_drumroll">Manage your Marionette.js sub-views...</h2>
     </div>
 </section>
@@ -46,6 +45,7 @@
         <button class="boss-button boss-header_download-button"><i class="icon-file-text-alt boss-download_download-button-icon"></i> Download <span class="boss-download_download-button-size">(min X.xk)</span></button>
         <button class="boss-button boss-header_download-button"><i class="icon-file-text-alt boss-download_download-button-icon"></i> Download <span class="boss-download_download-button-size">(amd min X.xk)</span></button>
     </div>
+    <div class="boss-download_dependencies">Dependencies: jQuery (tentative), underscore.js, backbone.js and marionette.js.</div>
 </section>
 <section class="boss-examples" id="examples">
     <h2 class="boss-examples_heading"><i class="icon-code"></i> Examples</h2>
@@ -97,8 +97,84 @@
             </div>
         </div>
     </div>
-    <div class="boss-examples_example-header-title">CodePen Examples</div>
+    <div class="boss-examples_example-header-title">CodePen Example</div>
+    <div class="boss-examples_codepen-example">
+        <p data-height="268" data-theme-id="856" data-slug-hash="yleij" data-user="justspamjustin" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/justspamjustin/pen/yleij'>yleij</a> by Justin (<a href='http://codepen.io/justspamjustin'>@justspamjustin</a>) on <a href='http://codepen.io'>CodePen</a></p>
+        <script async src="http://codepen.io/assets/embed/ei.js"></script>
+    </div>
 
+</section>
+<section id="docs" class="boss-docs">
+    <h2 class="boss-examples_heading"><i class="icon-gears"></i> Docs</h2>
+    <div class="boss-docs_item">
+        <div class="boss-docs_item-heading">BossView Basics</div>
+        <div class="boss-docs_item-summary">
+            BossView is an extension of the Marionette.ItemView.  You have access to all of the same methods that Marionette.ItemView has.
+        </div>
+    </div>
+
+    <div class="boss-docs_item">
+        <div class="boss-docs_item-heading"><i class="icon-gear"></i> subViews</div>
+        <div class="boss-docs_item-summary">
+            Specify your views in the 'subViews' object.  BossView will automatically render these sub-views for you when the BossView is rendered.  The key becomes the instance of the subView on the
+            parent view.  On the right, you can either specify a function and initialize your view manually,
+            returning the instance, or just specify the view class and BossView will initialize it for you.
+        </div>
+        <div class="boss-docs_item-example">
+            <script src="https://gist.github.com/justspamjustin/6359269.js"></script>
+        </div>
+    </div>
+
+    <div class="boss-docs_item">
+        <div class="boss-docs_item-heading"><i class="icon-gear"></i> subViewEvents</div>
+        <div class="boss-docs_item-summary">
+            For minimum cohesion, subViews should only communicate to its parent view through events.  The 'subViewEvents' object
+            allows you to treat your subView events in the same way you would handle dom events with the
+            'events' object.  If you want to listen to all subviews for an event, just use the '*' character
+            for the subViewName.  Also, BossView will bubble each of the events of the sub-views by prepending the name of the subview (ie. 'someSubView:render').
+        </div>
+        <div class="boss-docs_item-example">
+            <script src="https://gist.github.com/justspamjustin/6359428.js"></script>
+        </div>
+    </div>
+
+    <div class="boss-docs_item">
+        <div class="boss-docs_item-heading"><i class="icon-gear"></i> subViewContainers</div>
+        <div class="boss-docs_item-summary">
+            Sometimes you will want to render your subViews inside of a containing element of your BossView.
+             Do this by implementing the 'subViewContainers' object.  The key should correspond the name of the
+             subView that you specified in the 'subViews' object.  The property should be the jQuery selector of the
+             containing element.
+        </div>
+        <div class="boss-docs_item-example">
+            <script src="https://gist.github.com/justspamjustin/6359552.js"></script>
+        </div>
+    </div>
+
+    <div class="boss-docs_item">
+        <div class="boss-docs_item-heading"><i class="icon-gear"></i> mainSubViewContainer</div>
+        <div class="boss-docs_item-summary">
+            Sometimes you may want to have all of the subViews render inside one parent div without
+            having to specify the same subView container for each subView.  To do this, just specify a
+            jQuery selector for the 'mainSubViewContainer' property.  All subViews will be rendered in the container
+            except any subViews that have been specified in 'subViewContainers'.
+        </div>
+        <div class="boss-docs_item-example">
+            <script src="https://gist.github.com/justspamjustin/6359622.js"></script>
+        </div>
+    </div>
+
+    <div class="boss-docs_item">
+        <div class="boss-docs_item-heading"><i class="icon-gear"></i> subViewRenderConditions</div>
+        <div class="boss-docs_item-summary">
+            Sometimes you may want to only render your subViews under some condition.  In this case, provide
+            a 'subViewRenderConditions' object.  Define a function that
+            returns truthy or falsey.
+        </div>
+        <div class="boss-docs_item-example">
+            <script src="https://gist.github.com/justspamjustin/6359706.js"></script>
+        </div>
+    </div>
 </section>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="public/js/scrollspy.js"></script>

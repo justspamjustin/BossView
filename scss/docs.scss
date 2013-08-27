@@ -1,0 +1,25 @@
+@import "lib/widths";
+@import "lib/colors";
+
+.boss-docs {
+  width: $body-width-large;
+  margin: 2em auto;
+  color: $grey;
+}
+
+.boss-docs_item-heading {
+  font-size: 200%;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.boss-docs_item-summary {
+  width: 60%;
+  font-size: 110%;
+  padding-bottom: 2rem;
+}
+
+.boss-docs_item-example {
+  padding-bottom: 2rem;
+  width: 60%;
+}
