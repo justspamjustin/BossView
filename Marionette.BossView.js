@@ -57,10 +57,10 @@
  *   event. The parent view would trigger a 'buttonView:select' event.
  */
 
-Marionette.BossView = Marionette.ItemView.extend({
+Backbone.Marionette.BossView = Backbone.Marionette.ItemView.extend({
   template: function () {},
   constructor: function () {
-    Marionette.ItemView.prototype.constructor.apply(this, arguments);
+    Backbone.Marionette.ItemView.prototype.constructor.apply(this, arguments);
     this.initializeSubViews();
     this.initializeChildViewEvents();
     this.initializeSubViewEventBubbling();
@@ -204,7 +204,7 @@ Marionette.BossView = Marionette.ItemView.extend({
   },
 
   remove: function () {
-    Marionette.ItemView.prototype.remove.apply(this, arguments);
+    Backbone.Marionette.ItemView.prototype.remove.apply(this, arguments);
     this.removeSubViews();
   },
 
