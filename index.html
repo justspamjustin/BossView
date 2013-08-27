@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BossView - Manage your Marionette.js views like a boss! Manages events and rendering of sub-views.</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="public/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="public/css/style.css"/>
+</head>
+<body>
+<header class="boss-header">
+    <div class="boss-header_inner-container">
+        <a href="#home">
+            <div class="boss-header_logo">
+                <i class="boss-header_logo-icon icon-headphones"></i> <span class="boss-header_name">Boss<strong>View</strong></span>
+            </div>
+        </a>
+        <nav class="boss-header_nav">
+            <ul>
+                <li class="boss-header_nav-item"><a href="#about">about</a></li>
+                <li class="boss-header_nav-item"><a href="#download">download</a></li>
+                <li class="boss-header_nav-item"><a href="#examples">examples</a></li>
+                <li class="boss-header_nav-item"><a href="#docs">docs</a></li>
+                <li class="boss-header_nav-item boss-header_nav-icon"><a href="https://github.com/justspamjustin/BossView" title="View on github."><i class="icon-github-alt"></i></a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<section class="boss-hero" id="home">
+    <div class="boss-hero_inner-container">
+        <h1 class="boss-hero_punchline">Like a <strong>Boss!</strong></h1>
+        <img class="boss-hero_marionette-handles" src="public/img/marionette-handles.png"/>
+        <h2 class="boss-hero_drumroll">Manage your Marionette.js sub-views...</h2>
+    </div>
+</section>
+<section class="boss-about" id="about">
+    <p>
+        Boss<strong>View</strong>, an extension of Marionette.js, is an abstraction that manages events and rendering of sub-views. Using sub-views is such a common pattern, you will never stop using Boss<strong>View</strong>.
+    </p>
+</section>
+<section class="boss-download" id="download">
+    <div class="boss-download_downloads-row">
+        <button class="boss-button boss-header_download-button"><i class="icon-file-text boss-download_download-button-icon"></i> Download <span class="boss-download_download-button-size">(dev X.xk)</span></button>
+        <button class="boss-button boss-header_download-button"><i class="icon-file-text boss-download_download-button-icon"></i> Download <span class="boss-download_download-button-size">(amd dev X.xk)</span></button>
+    </div>
+    <div class="boss-download_downloads-row">
+        <button class="boss-button boss-header_download-button"><i class="icon-file-text-alt boss-download_download-button-icon"></i> Download <span class="boss-download_download-button-size">(min X.xk)</span></button>
+        <button class="boss-button boss-header_download-button"><i class="icon-file-text-alt boss-download_download-button-icon"></i> Download <span class="boss-download_download-button-size">(amd min X.xk)</span></button>
+    </div>
+</section>
+<section class="boss-examples" id="examples">
+    <h2 class="boss-examples_heading"><i class="icon-code"></i> Examples</h2>
+    <div class="boss-examples_example-row">
+        <div class="boss-examples_example-container">
+            <div class="boss-examples_example-header-title">Marionette.js Standalone</div>
+        </div>
+        <div class="boss-examples_example-container">
+            <div class="boss-examples_example-header-title">Marionette.js w/ BossView</div>
+        </div>
+    </div>
+
+    <div class="boss-examples_example-row">
+        <div class="boss-examples_example-container">
+            <div class="boss-examples_example-title">Render a Sub-view</div>
+            <div class="boss-examples_example boss-examples_render-example">
+                <script src="https://gist.github.com/justspamjustin/6355830.js"></script>
+            </div>
+        </div>
+        <div class="boss-examples_example-container">
+            <div class="boss-examples_example boss-examples_render-example">
+                <script src="https://gist.github.com/justspamjustin/6355982.js"></script>
+            </div>
+        </div>
+    </div>
+    <div class="boss-examples_example-row">
+        <div class="boss-examples_example-container">
+            <div class="boss-examples_example-title">Render a Sub-view and listen for events</div>
+            <div class="boss-examples_example boss-examples_render-event-example">
+                <script src="https://gist.github.com/justspamjustin/6356338.js"></script>
+            </div>
+        </div>
+        <div class="boss-examples_example-container">
+            <div class="boss-examples_example boss-examples_render-event-example">
+                <script src="https://gist.github.com/justspamjustin/6357689.js"></script>
+            </div>
+        </div>
+    </div>
+    <div class="boss-examples_example-row">
+        <div class="boss-examples_example-container">
+            <div class="boss-examples_example-title">Render a Sub-view in a Containing Element</div>
+            <div class="boss-examples_example boss-examples_render-container-example">
+                <script src="https://gist.github.com/justspamjustin/6357778.js"></script>
+            </div>
+        </div>
+        <div class="boss-examples_example-container">
+            <div class="boss-examples_example boss-examples_render-container-example">
+                <script src="https://gist.github.com/justspamjustin/6357819.js"></script>
+            </div>
+        </div>
+    </div>
+    <div class="boss-examples_example-header-title">CodePen Examples</div>
+
+</section>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="public/js/scrollspy.js"></script>
+</body>
+</html>

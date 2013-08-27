@@ -1,0 +1,58 @@
+@import "lib/widths";
+
+.boss-examples {
+  width: $body-width-large;
+  margin: 2em auto;
+}
+
+.boss-examples_heading {
+  color: $grey;
+  font-weight: 300;
+}
+
+.boss-examples_example-row {
+  margin-top: 2em;
+  > .boss-examples_example-container:last-child {
+    float: right;
+    > .boss-examples_example {
+      margin-top: 3.05em;
+    }
+  }
+}
+
+.boss-examples_example-container {
+  width: 46.5%;
+  display: inline-block;
+}
+
+.boss-examples_example {
+  @include border-radius(.25em);
+  overflow: hidden;
+}
+
+.boss-examples_example-header-title {
+  font-size: 250%;
+  color: $grey;
+}
+
+.boss-examples_example-title {
+  color: $grey;
+  font-size: 150%;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  &:before {
+    content: '> ';
+  }
+}
+
+.boss-examples_render-example {
+  height: 23.2em;
+}
+
+.boss-examples_render-event-example {
+  height: 27.9em;
+}
+
+.boss-examples_render-container-example {
+  height: 26.7em;
+}

@@ -1,0 +1,38 @@
+@import "lib/colors";
+@import "lib/widths";
+
+.boss-hero {
+  background-color: $reddish;
+  height: 20em;
+}
+
+.boss-hero_inner-container {
+  width: $body-width-large;
+  padding: 2em 0;
+  margin: auto;
+  position: relative;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.boss-hero_drumroll {
+  color: $grey;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-top: 1rem;
+}
+
+.boss-hero_punchline {
+  color: $grey;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-bottom: 1rem;
+}
+
+.boss-hero_marionette-handles {
+  position: absolute;
+  bottom: 0;
+  left: 6em;
+}

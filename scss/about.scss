@@ -1,0 +1,11 @@
+@import "lib/colors";
+@import "lib/widths";
+
+.boss-about {
+  font-size: 210%;
+  color: $grey;
+  width: $body-width-large;
+  margin: auto;
+  line-height: 1.8;
+  padding: 1rem;
+}

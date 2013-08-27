@@ -1,0 +1,25 @@
+@import "lib/widths";
+
+.boss-download {
+  width: $body-width-large;
+  margin: auto;
+}
+
+.boss-download_downloads-row {
+  margin: auto;
+  width: 50.25em;
+}
+
+.boss-header_download-button {
+  width: 21rem;
+  margin: 1rem 2rem;
+}
+
+.boss-download_download-button-icon {
+  font-size: 130%;
+}
+
+.boss-download_download-button-size {
+  font-weight: 300;
+  font-size: 80%;
+}

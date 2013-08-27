@@ -1,0 +1,47 @@
+/* line 4, ../../scss/header.scss */
+.boss-header {
+  background-color: #f1f1f1;
+  height: 5em;
+  color: #4d5668;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  top: 0;
+}
+
+/* line 14, ../../scss/header.scss */
+.boss-header_inner-container {
+  width: 80%;
+  margin: auto;
+  padding: 1em 0;
+}
+
+/* line 20, ../../scss/header.scss */
+.boss-header_logo {
+  font-size: 200%;
+  float: left;
+  margin-top: .25rem;
+}
+
+/* line 26, ../../scss/header.scss */
+.boss-header_nav {
+  float: right;
+}
+
+/* line 30, ../../scss/header.scss */
+.boss-header_nav-item {
+  list-style-type: none;
+  float: left;
+  font-size: 130%;
+  margin-right: 2rem;
+  padding-left: 2rem;
+}
+/* line 36, ../../scss/header.scss */
+.boss-header_nav-item > a.selected {
+  font-weight: 600;
+}
+
+/* line 41, ../../scss/header.scss */
+.boss-header_nav-icon {
+  padding: inherit;
+}

@@ -1,0 +1,45 @@
+@import "lib/colors";
+@import "lib/widths";
+
+.boss-header {
+  background-color: $grey;
+  height: 5em;
+  color: $dark-blue;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  top: 0;
+}
+
+.boss-header_inner-container {
+  width: $body-width-large;
+  margin: auto;
+  padding: 1em 0;
+}
+
+.boss-header_logo {
+  font-size: 200%;
+  float: left;
+  margin-top: .25rem;
+}
+
+.boss-header_nav {
+  float: right;
+}
+
+.boss-header_nav-item {
+  list-style-type: none;
+  float: left;
+  font-size: 130%;
+  margin-right: 2rem;
+  padding-left: 2rem;
+  > a.selected {
+    font-weight: 600;
+  }
+}
+
+.boss-header_nav-icon {
+  padding: inherit;
+}
+
+
