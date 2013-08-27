@@ -124,6 +124,13 @@ h1 {
 }
 
 /* line 26, ../../scss/hero.scss */
+.boss-hero_boss-image {
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+}
+
+/* line 32, ../../scss/hero.scss */
 .boss-hero_punchline {
   color: #f1f1f1;
   position: absolute;
@@ -132,7 +139,7 @@ h1 {
   padding-bottom: 1rem;
 }
 
-/* line 34, ../../scss/hero.scss */
+/* line 40, ../../scss/hero.scss */
 .boss-hero_marionette-handles {
   position: absolute;
   bottom: 0;
