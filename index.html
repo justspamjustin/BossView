@@ -138,7 +138,7 @@
     <div class="boss-docs_item">
         <div class="boss-docs_item-heading"><i class="icon-gear"></i> subViewEvents</div>
         <div class="boss-docs_item-summary">
-            For minimum cohesion, subViews should only communicate to its parent view through events.  The 'subViewEvents' object
+            For the sake of decoupling views, subViews should only communicate to its parent view through events.  The 'subViewEvents' object
             allows you to treat your subView events in the same way you would handle dom events with the
             'events' object.  If you want to listen to all subviews for an event, just use the '*' character
             for the subViewName.  Also, BossView will bubble each of the events of the sub-views by prepending the name of the subview (ie. 'someSubView:render').
