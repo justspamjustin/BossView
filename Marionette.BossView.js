@@ -58,7 +58,7 @@
  */
 
 Backbone.Marionette.BossView = Backbone.Marionette.ItemView.extend({
-  template: function () {},
+  template: function () { return ''; },
   constructor: function () {
     Backbone.Marionette.ItemView.prototype.constructor.apply(this, arguments);
     this.initializeSubViews();
