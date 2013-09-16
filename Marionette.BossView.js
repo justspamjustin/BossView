@@ -1,6 +1,6 @@
 /**
  * https://github.com/justspamjustin/BossView
- * BossView v 0.1.0
+ * BossView v 0.1.1
  * Extend from BossView for the following conveniences:
  *
  * - Specify your views in the 'subViews' object.  The key becomes the instance of the subView on the
