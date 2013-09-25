@@ -1,60 +1,6 @@
 /**
  * https://github.com/justspamjustin/BossView
- * BossView v 0.1.1
- * Extend from BossView for the following conveniences:
- *
- * - Specify your views in the 'subViews' object.  The key becomes the instance of the subView on the
- *   parent view.  On the right, you can either specify a function and initialize your view manually,
- *   returning the instance, or just specify the view class and BossView will initialize it for you.
- *   Example:
- * - subViews: {
- *    subViewName: function () {
- *        return new SomeView({
- *          size: 'small'
- *        });
- *    },
- *    // or
- *    otherSubViewName: SomeOtherView
- * }
- *
- * - subViews should only communicate to its parent view through events.  The 'subViewEvents' object
- *   allows you to treat your subView events in the same way you would handle dom events with the
- *   'events' object.  If you want to listen to all subviews for an event, just use the '*' character
- *    for the subViewName.
- *   Example:
- * - subViewEvents: {
- *    'subViewName subview:event': 'eventHandlerCallback'
- * }
- *
- * - Sometimes you will want to render your subViews inside of a containing element of your BossView.
- *   Do this by implementing the 'subViewContainers' object.  The key should correspond the name of the
- *   subView that you specified in the 'subViews' object.  The key is the jQuery selector of the
- *   containing element.
- *
- * - subViewContainers: {
- *  subViewName: '.sub-view-container'
- * }
- *
- * - Sometimes you may want to have all of the subViews render inside one parent div without
- *   having to specify the same subView container for each subView.  To do this, just specify a
- *   jQuery selector for the 'mainSubViewContainer' property.
- *
- * - mainSubViewContainer: '.sub-view-container'
- *
- * - Sometimes you may want to only render your subViews under some condition.  In this case, provide
- *   a 'subViewRenderConditions' hash.  Define a function that
- *   returns truthy or falsey.
- *
- * - subViewRenderConditions: {
- *     subViewName: function () {
- *      return this.collection.length > 0;
- *     }
- *   }
- *
- * - SubView Event Bubbling
- *   BossView will automatically bubble up the events of your subviews.  It will be prepended with the
- *   name of the subview.  For example, if your subview was named 'buttonView', and it triggered a 'select'
- *   event. The parent view would trigger a 'buttonView:select' event.
+ * BossView v 0.1.2
  */
 
 Backbone.Marionette.BossView = Backbone.Marionette.ItemView.extend({
@@ -151,12 +97,13 @@ Backbone.Marionette.BossView = Backbone.Marionette.ItemView.extend({
   },
 
   _renderSubViews: function () {
+    var mainSubViewContainer = this._getOption('mainSubViewContainer');
     this._eachSubView(_.bind(function (subViewName) {
       var appendToEl = this.getParentEl();
       if (this._hasSubViewContainer(subViewName)) {
         appendToEl = this._getSubViewContainer(subViewName);
-      } else if (this._getMainSubViewContainer()) {
-        appendToEl = this.$(this._getMainSubViewContainer());
+      } else if (mainSubViewContainer) {
+        appendToEl = this.$(mainSubViewContainer);
       }
       this._renderSubView(subViewName, appendToEl);
     }, this));
@@ -190,12 +137,13 @@ Backbone.Marionette.BossView = Backbone.Marionette.ItemView.extend({
   },
 
   _eachSubViewEvent: function (callback) {
-    if (this._getSubViewEvents()) {
-      for (var subViewEventKey in this._getSubViewEvents()) {
+    var subViewEvents = this._getOption('subViewEvents');
+    if (subViewEvents) {
+      for (var subViewEventKey in subViewEvents) {
         var split = this._splitSubViewEventKey(subViewEventKey);
         this._checkSubViewExistsForEvents(split.subViewName);
         var subView = split.subViewName === '*' ? '*' : this[split.subViewName];
-        callback(subView, split.subViewEventName, this._getSubViewEvents()[subViewEventKey]);
+        callback(subView, split.subViewEventName, subViewEvents[subViewEventKey]);
       }
     }
   },
@@ -215,38 +163,15 @@ Backbone.Marionette.BossView = Backbone.Marionette.ItemView.extend({
   },
 
   _hasSubViewContainer: function (subViewName) {
-    return !_.isUndefined(this._getSubViewContainers()) && !_.isUndefined(this._getSubViewContainers()[subViewName]);
+    var subViewContainers = this._getOption('subViewContainers');
+    return !_.isUndefined(subViewContainers) && !_.isUndefined(subViewContainers[subViewName]);
   },
 
   _getSubViewContainer: function (subViewName) {
     if (!this._hasSubViewContainer(subViewName)) {
       throw new Error('No subview container for subView: ' + subViewName);
     }
-    return this.$(this._getSubViewContainers()[subViewName]);
-  },
-
-  _getSubViewContainers: function () {
-    return this.subViewContainers || this.options.subViewContainers;
-  },
-
-  _getMainSubViewContainer: function () {
-    return this.mainSubViewContainer || this.options.mainSubViewContainer;
-  },
-
-  _getSubViews: function () {
-    var subViews = _.result(this, 'subViews');
-    if (this.options.subViews) {
-      subViews = _.result(this.options, 'subViews');
-    }
-    return subViews;
-  },
-
-  _getSubViewEvents: function () {
-    return this.subViewEvents || this.options.subViewEvents;
-  },
-
-  _getSubViewRenderConditions: function () {
-    return this.subViewRenderConditions || this.options.subViewRenderConditions || {};
+    return this.$(this._getOption('subViewContainers')[subViewName]);
   },
 
   remove: function () {
@@ -258,6 +183,21 @@ Backbone.Marionette.BossView = Backbone.Marionette.ItemView.extend({
     this._eachSubView(_.bind(function (subViewName) {
       this[subViewName].remove();
     }, this));
-  }
+  },
 
+  _getSubViews: function () {
+    var subViews = _.result(this, 'subViews');
+    if (this.options.subViews) {
+      subViews = _.result(this.options, 'subViews');
+    }
+    return subViews;
+  },
+
+  _getOption: function (optionName) {
+    return this[optionName] || this.options[optionName];
+  },
+
+  _getSubViewRenderConditions: function () {
+    return this._getOption('subViewRenderConditions') || {};
+  }
 });
