@@ -40,6 +40,23 @@ describe 'BossView', ->
       testView.testSubView.trigger('someevent')
       expect(eventSpy).to.be.called
 
+    it 'should be able to listen to subView events two levels deep', ->
+      eventSpy = sinon.spy()
+      TestView = BossView.extend
+        subViews:
+          testSubView: ->
+            return new BossView
+              subViews:
+                testInnerSubView: Backbone.View
+        subViewEvents:
+          'testSubView testInnerSubView:someevent': 'onSomeEvent'
+        onSomeEvent: ->
+          eventSpy()
+
+      testView = new TestView()
+      testView.testSubView.testInnerSubView.trigger('someevent')
+      expect(eventSpy).to.be.called
+
     it 'Should also listen to an inline function for subViewEvents', ->
       eventSpy = sinon.spy()
       TestView = BossView.extend
