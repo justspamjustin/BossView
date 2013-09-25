@@ -81,6 +81,16 @@ describe 'BossView', ->
         testView = new TestView()
       expect(shouldThrow).to.throw('noFunction to use as a callback')
 
+    it 'should allow you to specify subViews as a function', ->
+      TestView = BossView.extend
+        subViews: ->
+          return {
+            testSubView: ->
+              return new Backbone.View()
+          }
+      testView = new TestView()
+      expect(testView.testSubView).to.be.an.instanceOf(Backbone.View)
+
   describe '#onParentRendered', ->
     beforeEach ->
       testView.render()
