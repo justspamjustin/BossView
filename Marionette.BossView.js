@@ -93,7 +93,9 @@ Backbone.Marionette.BossView = Backbone.Marionette.ItemView.extend({
   },
 
   _onParentRendered: function () {
+    this.trigger('subviews:before:render');
     this._renderSubViews();
+    this.trigger('subviews:after:render');
   },
 
   _renderSubViews: function () {
