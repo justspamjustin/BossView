@@ -1,6 +1,6 @@
 /**
  * https://github.com/justspamjustin/BossView
- * BossView v 0.1.2
+ * BossView v 0.1.3
  */
 
 define(function (require) {
@@ -97,7 +97,9 @@ define(function (require) {
     },
 
     _onParentRendered: function () {
+      this.trigger('subviews:before:render');
       this._renderSubViews();
+      this.trigger('subviews:after:render');
     },
 
     _renderSubViews: function () {
@@ -204,7 +206,6 @@ define(function (require) {
     _getSubViewRenderConditions: function () {
       return this._getOption('subViewRenderConditions') || {};
     }
-
   });
   return Marionette.BossView;
 });

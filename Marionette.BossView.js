@@ -1,6 +1,6 @@
 /**
  * https://github.com/justspamjustin/BossView
- * BossView v 0.1.2
+ * BossView v 0.1.3
  */
 
 Backbone.Marionette.BossView = Backbone.Marionette.ItemView.extend({
