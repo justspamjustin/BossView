@@ -259,4 +259,25 @@ describe 'BossView', ->
       parent.renderSubView('child')
       expect(parent.$el.text().trim()).to.equal('child')
 
+    it 'should also be removed properly after being initialized and cleaned up', ->
+      ChildView = Marionette.ItemView.extend
+        className: 'child-view'
+        template: -> 'child'
+
+
+      Parent = BossView.extend
+        className: 'boss-view'
+
+        initChildView: ->
+          @initializeSubView('child', ChildView)
+
+      parent = new Parent()
+      container = $('<div></div>').appendTo($('body'))
+      parent.render().$el.appendTo(container)
+      parent.initChildView()
+      parent.renderSubView('child')
+      parent.remove()
+      expect(container.text()).to.be.empty
+
+
 
