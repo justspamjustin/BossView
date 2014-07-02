@@ -24,6 +24,7 @@ Backbone.Marionette.BossView = Backbone.Marionette.ItemView.extend({
   },
 
   _initializeSubViews: function () {
+    this.initializedSubViews = {};
     this._eachSubView(_.bind(this._initializeSubView, this));
   },
 
@@ -31,6 +32,7 @@ Backbone.Marionette.BossView = Backbone.Marionette.ItemView.extend({
     var subView = this._getInitializedSubView(subViewFunction);
     this._checkSubViewForRender(subView, subViewName);
     this[subViewName] = subView;
+    this.initializedSubViews[subViewName] = subView;
   },
 
   initializeSubView: function(subViewName, subViewFunction) {
@@ -190,9 +192,9 @@ Backbone.Marionette.BossView = Backbone.Marionette.ItemView.extend({
   },
 
   _removeSubViews: function () {
-    this._eachSubView(_.bind(function (subViewName) {
-      this[subViewName].remove();
-    }, this));
+    _.each(this.initializedSubViews, function(subView) {
+      subView.remove();
+    });
   },
 
   _getSubViews: function () {
