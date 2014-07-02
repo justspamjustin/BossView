@@ -1,6 +1,6 @@
 /**
  * https://github.com/justspamjustin/BossView
- * BossView v 0.1.3
+ * BossView v 0.1.4
  */
 
 define(function (require) {
@@ -14,8 +14,7 @@ define(function (require) {
     constructor: function () {
       Marionette.ItemView.prototype.constructor.apply(this, arguments);
       this._initializeSubViews();
-      this._initializeChildViewEvents();
-      this._initializeSubViewEventBubbling();
+      this._afterInitializeSubViews();
       this.listenTo(this, 'render', this._onParentRendered);
     },
 
@@ -23,12 +22,26 @@ define(function (require) {
       return this.$el;
     },
 
+    _afterInitializeSubViews: function() {
+      this._initializeChildViewEvents();
+      this._initializeSubViewEventBubbling();
+    },
+
     _initializeSubViews: function () {
-      this._eachSubView(_.bind(function (subViewName, subViewFunction) {
-        var subView = this._getInitializedSubView(subViewFunction);
-        this._checkSubViewForRender(subView, subViewName);
-        this[subViewName] = subView;
-      }, this));
+      this.initializedSubViews = {};
+      this._eachSubView(_.bind(this._initializeSubView, this));
+    },
+
+    _initializeSubView: function(subViewName, subViewFunction) {
+      var subView = this._getInitializedSubView(subViewFunction);
+      this._checkSubViewForRender(subView, subViewName);
+      this[subViewName] = subView;
+      this.initializedSubViews[subViewName] = subView;
+    },
+
+    initializeSubView: function(subViewName, subViewFunction) {
+      this._initializeSubView(subViewName, subViewFunction);
+      this._afterInitializeSubViews();
     },
 
     _getInitializedSubView: function (subViewFunction) {
@@ -61,7 +74,9 @@ define(function (require) {
         if (subView === '*') {
           this._listenToEventOnAllSubViews(subViewEventCallback, subViewEventName);
         } else {
-          this.listenTo(subView, subViewEventName, subViewEventCallback);
+          if (subView) {
+            this.listenTo(subView, subViewEventName, subViewEventCallback);
+          }
         }
       }, this));
     },
@@ -103,16 +118,18 @@ define(function (require) {
     },
 
     _renderSubViews: function () {
+      this._eachSubView(_.bind(this.renderSubView, this));
+    },
+
+    renderSubView: function(subViewName) {
       var mainSubViewContainer = this._getOption('mainSubViewContainer');
-      this._eachSubView(_.bind(function (subViewName) {
-        var appendToEl = this.getParentEl();
-        if (this._hasSubViewContainer(subViewName)) {
-          appendToEl = this._getSubViewContainer(subViewName);
-        } else if (mainSubViewContainer) {
-          appendToEl = this.$(mainSubViewContainer);
-        }
-        this._renderSubView(subViewName, appendToEl);
-      }, this));
+      var appendToEl = this.getParentEl();
+      if (this._hasSubViewContainer(subViewName)) {
+        appendToEl = this._getSubViewContainer(subViewName);
+      } else if (mainSubViewContainer) {
+        appendToEl = this.$(mainSubViewContainer);
+      }
+      this._renderSubView(subViewName, appendToEl);
     },
 
     _renderSubView: function (subViewName, appendToEl) {
@@ -147,7 +164,6 @@ define(function (require) {
       if (subViewEvents) {
         for (var subViewEventKey in subViewEvents) {
           var split = this._splitSubViewEventKey(subViewEventKey);
-          this._checkSubViewExistsForEvents(split.subViewName);
           var subView = split.subViewName === '*' ? '*' : this[split.subViewName];
           callback(subView, split.subViewEventName, subViewEvents[subViewEventKey]);
         }
@@ -159,12 +175,6 @@ define(function (require) {
       return {
         subViewName: subViewEventKeySplit[0],
         subViewEventName: subViewEventKeySplit[1]
-      }
-    },
-
-    _checkSubViewExistsForEvents: function (subViewName) {
-      if (subViewName !== '*' && _.isUndefined(this[subViewName])) {
-        throw new Error('Subview named ' + subViewName + ' is not defined in subViews.');
       }
     },
 
@@ -186,9 +196,9 @@ define(function (require) {
     },
 
     _removeSubViews: function () {
-      this._eachSubView(_.bind(function (subViewName) {
-        this[subViewName].remove();
-      }, this));
+      _.each(this.initializedSubViews, function(subView) {
+        subView.remove();
+      });
     },
 
     _getSubViews: function () {
