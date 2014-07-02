@@ -146,3 +146,138 @@ describe 'BossView', ->
       outerView.render()
       $('.inner-view').click()
       expect(innerViewClicked.called).to.be.true
+
+
+  describe '#initializeSubView', ->
+    it 'should initialize the subview', ->
+      ChildView = Marionette.ItemView.extend
+        className: 'child-view'
+        template: -> 'child'
+
+
+      Parent = BossView.extend
+        className: 'boss-view'
+        initialize: ->
+          @listenTo(@, 'someevent', @initChildView)
+
+        initChildView: ->
+          @initializeSubView('child', ChildView)
+
+      parent = new Parent()
+      parent.trigger('someevent')
+      expect(parent.child.render).to.be.a.function
+
+    it 'should initialize the subview and also bind to the correct events for the sub view', ->
+      called = false
+
+      ChildView = Marionette.ItemView.extend
+        className: 'child-view'
+        template: -> 'child'
+
+      Parent = BossView.extend
+        className: 'boss-view'
+        initialize: ->
+          @listenTo(@, 'someevent', @initChildView)
+
+        initChildView: ->
+          @initializeSubView('child', ChildView)
+
+        subViewEvents:
+          'child childevent': 'onChildEvent'
+
+        onChildEvent: ->
+          called = true
+
+      parent = new Parent()
+      parent.trigger('someevent')
+      parent.child.trigger('childevent')
+      expect(called).to.be.true
+
+  describe '#renderSubView', ->
+    it 'should render the subview', ->
+      ChildView = Marionette.ItemView.extend
+        className: 'child-view'
+        template: -> 'child'
+
+
+      Parent = BossView.extend
+        className: 'boss-view'
+
+        initChildView: ->
+          @initializeSubView('child', ChildView)
+
+      parent = new Parent()
+      parent.render()
+      parent.initChildView()
+      parent.renderSubView('child')
+      expect(parent.$el.find('.child-view').text().trim()).to.equal('child')
+
+    it 'should render the subview in the correct container', ->
+      ChildView = Marionette.ItemView.extend
+        className: 'child-view'
+        template: -> 'child'
+
+
+      Parent = BossView.extend
+        className: 'boss-view'
+        template: ->
+          '<div class="some-container"></div>'
+
+        subViewContainers:
+          child: '.some-container'
+
+        initChildView: ->
+          @initializeSubView('child', ChildView)
+
+      parent = new Parent()
+      parent.render()
+      parent.initChildView()
+      parent.renderSubView('child')
+      expect(parent.$el.find('.some-container').text().trim()).to.equal('child')
+
+    it 'should follow the subview render conditions', ->
+      ChildView = Marionette.ItemView.extend
+        className: 'child-view'
+        template: -> 'child'
+
+
+      Parent = BossView.extend
+        className: 'boss-view'
+
+        subViewRenderConditions:
+          child: -> false
+
+        initChildView: ->
+          @initializeSubView('child', ChildView)
+
+      parent = new Parent()
+      parent.render()
+      parent.initChildView()
+      parent.renderSubView('child')
+      expect(parent.$el.text().trim()).not.to.equal('child')
+      parent.subViewRenderConditions.child = -> true
+      parent.renderSubView('child')
+      expect(parent.$el.text().trim()).to.equal('child')
+
+    it 'should also be removed properly after being initialized and cleaned up', ->
+      ChildView = Marionette.ItemView.extend
+        className: 'child-view'
+        template: -> 'child'
+
+
+      Parent = BossView.extend
+        className: 'boss-view'
+
+        initChildView: ->
+          @initializeSubView('child', ChildView)
+
+      parent = new Parent()
+      container = $('<div></div>').appendTo($('body'))
+      parent.render().$el.appendTo(container)
+      parent.initChildView()
+      parent.renderSubView('child')
+      parent.remove()
+      expect(container.text()).to.be.empty
+
+
+
