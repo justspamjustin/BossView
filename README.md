@@ -5,7 +5,7 @@ Manage your Marionette.js views like a boss!  Manages events and rendering of su
 
 http://justspamjustin.github.io/BossView/
 
-=Release Notes=
-==0.1.4==
+## Release Notes
+### 0.1.4
 - Add initializeSubView('subViewName') and rendeSubView('subViewName') functions for initializing and rendering subviews on the fly.
 
