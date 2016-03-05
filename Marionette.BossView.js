@@ -3,12 +3,12 @@
  * BossView v 0.1.4
  */
 
-Backbone.Marionette.BossView = Backbone.Marionette.ItemView.extend({
+
+Backbone.Marionette.BossMixin = {
   
   template: function () { return ''; },
   
-  constructor: function () {
-    Backbone.Marionette.ItemView.prototype.constructor.apply(this, arguments);
+  _initialize: function () {
     this._initializeSubViews();
     this._afterInitializeSubViews();
     this.listenTo(this, 'render', this._onParentRendered);
@@ -212,4 +212,29 @@ Backbone.Marionette.BossView = Backbone.Marionette.ItemView.extend({
   _getSubViewRenderConditions: function () {
     return this._getOption('subViewRenderConditions') || {};
   }
-});
+};
+
+Backbone.Marionette.BossView = Backbone.Marionette.ItemView.extend(_.extend({
+    constructor: function () {
+        Backbone.Marionette.ItemView.prototype.constructor.apply(this, arguments);
+        this._initialize();
+    },
+    remove: function () {
+        Backbone.Marionette.ItemView.prototype.remove.apply(this, arguments);
+        this._removeSubViews();
+    }
+
+}, Backbone.Marionette.BossMixin));
+
+Backbone.Marionette.BossViewCompositeView = Backbone.Marionette.CompositeView.extend(_.extend({
+    constructor: function () {
+        Backbone.Marionette.CompositeView.prototype.constructor.apply(this, arguments);
+        this._initialize();
+    },
+    remove: function () {
+        Backbone.Marionette.CompositeView.prototype.remove.apply(this, arguments);
+        this._removeSubViews();
+    }
+}, Backbone.Marionette.BossMixin));
+
+
